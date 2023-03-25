@@ -16,8 +16,11 @@ func main() {
 
 	setupAPI(ctx)
 
-	// Serve on port :8080, fudge yeah hardcoded port
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// Serve on port :8080, TODO: hardcoded port
+	err := http.ListenAndServeTLS(":8080", "server.crt", "server.key", nil)
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 }
 
 // setupAPI will start all Routes and their Handlers
